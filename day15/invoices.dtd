@@ -1,0 +1,10 @@
+<!ELEMENT invoices (customer,invoice+)>
+<!ELEMENT customer (cust_name,bill_date,bill_no)>
+<!ELEMENT invoice (item,quantity,price,S_No)>
+<!ELEMENT cust_name (#PCDATA)>
+<!ELEMENT bill_date (#PCDATA)>
+<!ELEMENT bill_no (#PCDATA)>
+<!ELEMENT item (#PCDATA)>
+<!ELEMENT quantity (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ELEMENT S_No (#PCDATA)>

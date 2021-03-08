@@ -1,0 +1,20 @@
+<!DOCTYPE invoices SYSTEM "invoices.dtd">
+<invoices>
+<customer>
+	<cust_name>Bharanidharan</cust_name>
+	<bill_date>08/03/2021</bill_date>
+	<bill_no>15</bill_no>
+</customer>
+<invoice>
+	<item>Rice</item>
+	<quantity>2</quantity>
+	<price>150</price>
+	<S_No>1</S_No>
+</invoice>
+<invoice>
+	<item>Dhaal</item>
+	<quantity>2</quantity>
+	<price>100</price>
+	<S_No>2</S_No>
+</invoice>
+</invoices>
