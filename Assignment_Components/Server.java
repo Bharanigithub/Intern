@@ -1,54 +1,84 @@
-package day16;
+package Assignment_Components;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.io.*;
 
 public class Server {
-	ServerSocket ss;
-	PrintWriter out;
-	BufferedReader br,in;
-	Socket s;
-	public Server() {
-		try {
-			ExecutorService es=Executors.newFixedThreadPool(1);
-			ss=new ServerSocket(2000);
-			System.out.println("Server Starts...");
-			synchronized (es) {
-				es.execute(()->{
-					try {
-						while (true) {
-							s = ss.accept();
-							System.out.println(s);
-							out = new PrintWriter(s.getOutputStream(), true);
-							in = new BufferedReader(new InputStreamReader(System.in));
-							System.out.println("Please Enter a message to Client..:");
-							String msg = in.readLine();
-							out.println(msg);
-							br = new BufferedReader(new InputStreamReader(s.getInputStream()));
-							String msgFromClient = br.readLine();
-							System.out.println("Message From Client...:" + msgFromClient);
-						} 
-						
-					}
-					catch (Exception e) {
-						// TODO: handle exception
-					}
-				});
-				es.shutdown();
+	int port;
+	ServerSocket server = null;
+	Socket client = null;
+	ExecutorService pool = null;
+	int noOfClient = 0;
 
-			}
-						
+	public static void main(String[] args) throws Exception {
+		Server serverObject = new Server();
+		serverObject.startServer();
+	}
+
+	public Server() {
+		pool = Executors.newFixedThreadPool(5);
+	}
+
+	public void startServer() throws Exception {
+		server = new ServerSocket(8000);
+		System.out.println("Server Started!!");
+		while (true) {
+			client = server.accept();
+			noOfClient++;
+			ServerThread run = new ServerThread(client, noOfClient, this);
+			pool.execute(run);
 		}
-		catch(Exception e) { 
-			e.printStackTrace(); 
+	}
+
+	private static class ServerThread implements Runnable {
+		Server server = null;
+		Socket client = null;
+		BufferedReader in;
+		PrintStream out;
+		int id;
+		String message;
+		Scanner sc = new Scanner(System.in);
+
+		public ServerThread(Socket client, int noOfClient, Server server) throws Exception {
+			this.client = client;
+			this.server = server;
+			this.id = noOfClient;
+
+			System.out.println("client "+id+" Conneceted!!" );
+			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			out = new PrintStream(client.getOutputStream());
+		}
+
+		@Override
+		public void run() {
+			boolean status = true;
+			try {
+				while (true) {
+					message = in.readLine();
+					System.out.println("From Client " + id + ":" + message);
+					System.out.println();
+					message = sc.nextLine();
+					if (message.equalsIgnoreCase("exit")) {
+						out.println("exited....");
+						status = false;
+						break;
+					}
+					out.println(message);
+				}
+				in.close();
+				out.close();
+				client.close();
+				if (status==false) {
+					System.exit(0);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+		}
 	}
-	public static void main(String[] args) {
-		new Server();
-	}
+
 }
