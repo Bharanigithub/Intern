@@ -48,7 +48,7 @@ public class PdfConverter implements ArrListToPdfConverter,Cloneable{
 			Document document = new Document();
 			PdfPTable table[]=new PdfPTable[arr.size()];
 			for (int i = 0; i < arr.size(); i++) {
-				table[0]=addTable(arr.get(i));
+				table[i]=addTable(arr.get(i));
 			}
 
 			PdfWriter.getInstance(document, new FileOutputStream(fileName));
