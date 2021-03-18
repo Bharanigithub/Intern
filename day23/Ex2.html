@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Depreciation Details</title>
+</head>
+<body>
+<script>
+	function print() {
+		var total=0;
+		var years=parseInt(document.fc.years.value);
+		var amnt=parseInt(document.fc.depamnt.value);
+		var b=[];
+		var sum=0;
+		for(j=1;j<=years;j++) {
+			sum=sum+j;
+		}
+		for(i=0;i<years;i++) {
+			var a=[];
+			a[0]=Math.round((i+1)*100)/100;
+			a[1]=Math.round((((years-i)/sum)*amnt)*100)/100;
+			if(i==0) {
+				a[2]=a[1];	
+			}
+			else {
+				a[2]=Math.round((b[i-1][2]+a[1])*100)/100;
+			}
+			a[3]=Math.round((amnt-a[2])*100)/100;
+			b[i]=a;
+		}
+		document.write("Year  ");
+		document.write("Depreciation Accumulated  ");
+		document.write("Depreciation  ");
+		document.write("Year  "+" <br/> ");
+		for(i=0;i<years;i++) {
+			for(j=0;j<4;j++) {
+				document.write(b[i][j]+"   ");
+			}
+			document.write(" <br/> ");
+		}
+	}
+</script>
+<form name="fc">
+<label for="depamnt">Enter the Actual Amount:</label><br/>
+<input type="text" name="depamnt" id="depamnt" required><br/>
+<label for="years">Enter the NO. of Years:</label>
+<input type="text" name="years" id="years" required><br/>
+<input type="button" value="Submit" onclick="print();"> 
+</form>
+</body>
+</html>

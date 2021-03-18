@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>Employee Form</title>
+</head>
+<body>
+<script>
+	function req() {
+		var name=document.empform.name.value;
+		var marArr= document.getElementsByName('status'); 
+		var mar;
+		for(i = 0; i < marArr.length; i++) {             
+            if(marArr[i].type="radio") { 
+                if(marArr[i].checked) {
+               		 mar=marArr[i].value;
+               		 break;
+                }
+            } 
+        } 
+        var genderArr = document.getElementsByName('gender'); 
+        var gender;
+        for(i = 0; i < genderArr.length; i++) {             
+            if(genderArr[i].type="radio") { 
+                if(genderArr[i].checked) {
+               		 gender=genderArr[i].value;
+               		 break;
+                }
+            } 
+        } 
+		var age=document.empform.age.value;
+		var hairstyle;
+		var hairstyleArr=document.getElementsByName('hairstyle');
+		for(i = 0; i < hairstyleArr.length; i++) {             
+            if(hairstyleArr[i].type="radio") { 
+                if(hairstyleArr[i].checked) {
+               		 hairstyle=hairstyleArr[i].value;
+               		 break;
+                }
+            } 
+        } 
+		var feet=document.empform.feet.value;
+		var inch=document.empform.inch.value;
+		var weight=document.empform.weight.value;
+		var flag=1;
+		if(mar=="married") {
+			flag=0;
+		}
+		else {
+			if(age<18 || age>30) {
+				flag=0;
+			}
+			else {
+				if(gender=="male") {
+					if(hairstyle=="bald") {
+						flag=0;
+					}
+					if(feet<5) {
+						flag=0;
+					}
+					else {
+						if(feet<=5 && inch<6) {
+							flag=0;
+						}
+					}
+					if(weight>75) {
+						flag=0;
+					}
+				}
+				else if(gender=="female") {
+					if(hairstyle=="shorthair") {
+						flag=0;
+					}
+					if(feet>5) {
+						if(inch>6) {
+							flag=0;
+						}
+					}
+					if(weight>55) {
+						flag=0;
+					}
+				}
+			}
+		}
+		if(flag==1) {
+			window.alert("You are selected for the Job!!");
+		}
+		else {
+			window.alert("Your Details does not meet the Requirements!!");
+		}
+	}
+</script>
+<form name="empform">
+<label for="name">Enter your Name:</label><br/>
+<input type="text" name="name" required><br/>
+<label for="gender">Enter Your Gender:</label><br/>
+<label for="gender">Male</label>
+<input type="radio" name="gender" value="male">
+<label for="gender">Female</label>
+<input type="radio" name="gender" value="female"><br/>
+<label for="status">Enter Your Marital Status:</label><br/>
+<label for="status">Married</label>
+<input type="radio" name="status" value="married">
+<label for="status">Unmarried</label>
+<input type="radio" name="status" value="unmarried"><br/>
+<label for="age">Enter your Age:</label><br/>
+<input type="number" name="age"><br/>
+<label>Enter Your Height:</label><br/>
+<label for="feet">Enter Feet:</label><br/>
+<input type="number" name="feet"><br/>
+<label for="inch">Enter Inches:</label><br/>
+<input type="number" name="inch"><br/>
+<label for="weight">Enter your Weight:</label><br/>
+<input type="number" name="weight"><br/>
+<label for="hairstyle">Enter your Hairstyle:</label><br/>
+<label for="hairstyle">Bald(For Men)</label>
+<input type="radio" name="hairstyle" value="bald">
+<label for="hairstyle">Short Hair Below Shoulder Length(For Women)</label>
+<input type="radio" name="hairstyle" value="shorthair">
+<label for="hairstyle">Other</label>
+<input type="radio" name="hairstyle" value="other"><br/>
+<input type="button" value="Submit" onclick="req();">
+</form>
+</body>
+</html>

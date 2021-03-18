@@ -1,0 +1,40 @@
+<html>
+<head>
+<script>
+	var x=[];
+	var cnt=0,flag=0;;
+	function capitalSelect() {
+		for(i=0;i<cnt;i++) {
+			if(x[i][0]==document.frm.printCap.value) {
+				window.alert(x[i][0]+"'s Capital: "+x[i][1]);
+				flag=1;
+				break;
+			}
+		}
+		if(flag==0) {
+			window.alert("Country Not Found in our Database!!Please Store it First!!");	
+		}
+	}
+	function capitalStore() {
+		var b=[];
+		b[0]=document.frm.countryName.value;
+		b[1]=document.frm.countryCapital.value;
+		x[cnt]=b;
+		window.alert("stored!!");
+		cnt++;
+	}
+</script>
+<title>Capitals</title>
+</head>
+<body>
+<form name="frm">
+<label for="countryName">Enter the Country Details For Storing:</label><br/>
+<input type="text" name="countryName" id="countryName" /><br/>
+<input type="text" name="countryCapital" id="countryCapital" /><br/>
+<input type="button" value="Click Here" onclick="capitalStore();"><br/>
+<label for="printCap">Enter the Country Name to Print The Capital:</label><br/>
+<input type="text" name="printCap" id="printCap"><br/>
+<input type="button" value="Press Here" onclick="capitalSelect();"><br/>
+</form>
+</body>
+</html>

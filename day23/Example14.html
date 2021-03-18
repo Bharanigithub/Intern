@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>JavaScript Example</title>
+	</head>
+	<body>
+		<script>
+			function person(x,y) {
+				this.name=x;
+				this.age=y;
+				this.display=display;
+			}
+			function display() {
+				document.write(" <BR> "+this.name+"  ");
+				document.write(this.age);
+			}
+			Ravi=new person("Ravi",21);
+			Ramesh=new person("Ramesh",23);
+			Ravi.display();
+			Ramesh.display();
+		</script>
+	</body>
+</html>

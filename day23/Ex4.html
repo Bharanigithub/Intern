@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Sales Report</title>
+</head>
+<body>
+<script>
+	var b=[]
+	var cnt=0;
+	function setTotal() {
+		var a=[]
+		var month=document.sf.month.value;
+		var north=parseInt(document.sf.north.value);
+		var central=parseInt(document.sf.central.value);
+		var south=parseInt(document.sf.south.value);
+		var total=north+central+south;
+		document.sf.total.value=total;
+		a[0]=month;
+		a[1]=north;
+		a[2]=central;
+		a[3]=south;
+		a[4]=total;
+		b[cnt]=a;
+		cnt++;
+		window.alert("Stored!!");
+	}
+	function print() {
+		document.write("Month   North   Central   South   Total"+" <br/> ");
+		for(i=0;i<cnt;i++) {
+			document.write(b[i][0]+" "+b[i][1]+" "+b[i][2]+" "+b[i][3]+" "+b[i][4]+" <br/>");
+		}
+	}
+</script>
+<form name="sf">
+<label for="month">Month:</label>
+<input name="month" id="month" type="text"><br/>
+<label for="north">North:</label>
+<input name="north" id="north" type="number"><br/>
+<label for="central">Central:</label>
+<input name="central" id="central" type="number"><br/>
+<label for="south">South:</label>
+<input name="south" id="south" type="number"><br/>
+<label for="total">Total:</label>
+<input name="total" id="total" type="number" value=""><br/>
+<input name="store" value="store" type="button" onClick="setTotal();"><br/>
+<input value="Get Details" type="button" onClick="print();"><br/>
+</form>
+</body>
+</html>

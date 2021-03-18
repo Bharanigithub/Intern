@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<title>JavaScript Example</title>
+	</head>
+	<body>
+		<script>
+			document.writeln("Hello World!!");
+			var str="JavaScript Example!!!";
+			var x=0;
+			function fun() {
+				window.status=str.substring(0,x);
+				x++;
+				if(x==str.length) {
+					x=0;
+				}		
+				window.setTimeout("fun();",100);
+			}
+			fun();
+			function person(x,y) {
+				this.name=x;
+				this.age=y;
+				this.display=display;
+			}
+			function display() {
+				document.write(" <BR> "+this.name+"  ");
+				document.write(this.age);
+			}
+			function ev1() {
+				window.alert("You Clicked!!");
+			}
+			Ravi=new person("Ravi",21);
+			Ramesh=new person("Ramesh",23);
+			Ravi.display();
+			Ramesh.display();
+			/*for(var i in Ravi) {
+				document.writeln(i+":"+Ravi[i]);
+			}*/
+			//window.setInterval("fun();",100);
+		</script>
+		<p>Click <a onClick="ev1();"  href="">Here</a></p>
+	</body>
+</html>
