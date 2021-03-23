@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="card" action="Example2.ab" method="post" onsubmit="return check();">
+	Enter your Name Here:<input type="text" name="name">
+	<input type="submit" value="submit">
+</form>
+<script>
+	function check() {
+		var x=document.card.name.value;
+		if(x.length==0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+</script>
+</body>
+</html>
